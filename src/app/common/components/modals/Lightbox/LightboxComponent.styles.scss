@@ -70,12 +70,12 @@
     }
 
     .yarl__navigation_prev {
-        @include slick-arrow-lightbox(left);
+        @include slick-arrow-lightbox(Left);
         left: pxToRem(30px) !important;
     }
 
     .yarl__navigation_next {
-        @include slick-arrow-lightbox(right);
+        @include slick-arrow-lightbox(Right);
         right: pxToRem(30px) !important;
     }
 }
