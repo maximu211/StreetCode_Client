@@ -97,6 +97,7 @@
     "@typescript-eslint/eslint-plugin": "^5.48.0",
     "@typescript-eslint/parser": "^5.48.0",
     "css-loader": "^6.7.3",
+    "dotenv-webpack": "^8.0.1",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^19.0.4",
     "file-loader": "^6.2.0",

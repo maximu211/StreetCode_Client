@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 
-axios.defaults.baseURL = 'https://localhost:5001/api';
+axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
 
 axios.interceptors.response.use(
     async (response) => response,

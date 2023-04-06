@@ -12,7 +12,7 @@ import useMobx from '@stores/root-store';
 const App = () => {
     const { pathname } = useLocation();
     const { modalStore: { isPageDimmed } } = useMobx();
-
+    console.log(process.env.REACT_APP_NAME);
     return (
         <div style={{ position: 'relative' }}>
             <ToastContainer position="bottom-right" limit={3} />
@@ -25,4 +25,4 @@ const App = () => {
         </div>
     );
 };
-export default observer(App);
+export default (App);

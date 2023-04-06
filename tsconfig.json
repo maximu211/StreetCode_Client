@@ -4,6 +4,11 @@
     "target": "es2017",
     "module": "esnext",
     "baseUrl": ".",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "paths": {
       "*": ["node_modules/*"],
       "@/*": ["./src/*"],
@@ -34,8 +39,8 @@
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": false,
-    "noEmit": false
+    "isolatedModules": true,
+    "noEmit": true
   },
   "files": [
     "./src/index.d.ts"
