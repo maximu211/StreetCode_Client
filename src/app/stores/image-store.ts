@@ -25,30 +25,39 @@ export default class ImageStore {
         return Array.from(this.ImageMap.values());
     }
 
-    static async getImageById(imageId:number):Promise<Image | undefined> {
-        let image:Image | undefined;
-        await imagesApi.getById(imageId)
-            .then((im) => {
-                image = im;
-            })
-            .catch((error) => {});
+    static async getImageById(imageId: number): Promise<Image | undefined> {
+        let image: Image | undefined;
+        if (imageId > 0) {
+            await imagesApi.getById(imageId)
+                .then((im) => {
+                    image = im;
+                })
+                .catch((error) => { });
+        }
         return image;
     }
 
-    public getImage = (id: number) => this.ImageMap.get(id);
+    public getImage = (id: number) => {
+        if (id > 0)
+            this.ImageMap.get(id)
+    };
 
     public fetchImage = async (id: number) => {
         try {
-            const image = await imagesApi.getById(id);
-            this.setItem(image);
-        } catch (error: unknown) {}
+            if (id > 0) {
+                const image = await imagesApi.getById(id);
+                this.setItem(image);
+            }
+        } catch (error: unknown) { }
     };
 
     public fetchImageByStreetcodeId = async (streetcodeId: number) => {
         try {
-            const image = await imagesApi.getByStreetcodeId(streetcodeId);
-            this.setInternalMap(image);
-        } catch (error: unknown) {}
+            if (streetcodeId > 0) {
+                const image = await imagesApi.getByStreetcodeId(streetcodeId);
+                this.setInternalMap(image);
+            }
+        } catch (error: unknown) { }
     };
 
     public createImage = async (image: ImageCreate) => {
@@ -56,7 +65,7 @@ export default class ImageStore {
             await imagesApi.create(image).then((resp) => {
                 this.setItem(resp);
             });
-        } catch (error: unknown) {}
+        } catch (error: unknown) { }
     };
 
     public updateImage = async (image: Image) => {
@@ -69,15 +78,17 @@ export default class ImageStore {
                 };
                 this.setItem(updatedImage as Image);
             });
-        } catch (error: unknown) {}
+        } catch (error: unknown) { }
     };
 
     public deleteImage = async (imageId: number) => {
         try {
-            await imagesApi.delete(imageId);
-            runInAction(() => {
-                this.ImageMap.delete(imageId);
-            });
-        } catch (error: unknown) {}
+            if (imageId > 0) {
+                await imagesApi.delete(imageId);
+                runInAction(() => {
+                    this.ImageMap.delete(imageId);
+                });
+            }
+        } catch (error: unknown) { }
     };
 }

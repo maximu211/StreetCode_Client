@@ -43,7 +43,7 @@ const FileInputsPart: React.FC = () => {
     const parseId = id ? +id : null;
 
     useEffect(() => {
-        if (parseId) {
+        if (parseId && parseId > 0) {
             const fetchData = async () => {
                 try {
 
@@ -83,7 +83,7 @@ const FileInputsPart: React.FC = () => {
                     });
 
                 } catch (error) {
-                   
+
                 } finally {
 
                 }
@@ -99,10 +99,10 @@ const FileInputsPart: React.FC = () => {
                 <FormItem
                     name="animations"
                     label="Анімація"
-                    rules={[{ required: parseId && images.length > 0 ? false : true, message: parseId ? 'Змінити анімацію':'Завантажте анімацію' }]}
+                    rules={[{ required: parseId && images.length > 0 ? false : true, message: parseId ? 'Змінити анімацію' : 'Завантажте анімацію' }]}
                 >
                     <FileUploader
-                      //fileList={images}
+                        //fileList={images}
                         accept=".gif"
                         listType="picture-card"
                         multiple={false}
@@ -113,10 +113,10 @@ const FileInputsPart: React.FC = () => {
                         onRemove={(file) => {
                             ImagesApi.delete(newStreetcodeInfoStore.animationId!);
                         }}
-                      // onChange={x => setImages(...images, images[0])}
+                    // onChange={x => setImages(...images, images[0])}
                     >
                         <InboxOutlined />
-                        <p className="ant-upload-text">{parseId && images.length>0 ? 'Змінити' : '+ Додати'}</p>
+                        <p className="ant-upload-text">{parseId && images.length > 0 ? 'Змінити' : '+ Додати'}</p>
                     </FileUploader>
                 </FormItem>
 
@@ -126,7 +126,7 @@ const FileInputsPart: React.FC = () => {
                     rules={[{ required: parseId && images.length > 1 ? false : true, message: parseId ? 'Змінити анімацію' : 'Завантажте анімацію' }]}
                 >
                     <FileUploader
-                      //fileList={[images[1] ?? []]}
+                        //fileList={[images[1] ?? []]}
                         multiple={false}
                         accept=".jpeg,.png,.jpg"
                         listType="picture-card"
@@ -137,7 +137,7 @@ const FileInputsPart: React.FC = () => {
                         onRemove={(file) => {
                             ImagesApi.delete(newStreetcodeInfoStore.blackAndWhiteId!);
                         }}
-                      //onChange={x => setImages(...images, images[1])}
+                    //onChange={x => setImages(...images, images[1])}
                     >
                         <InboxOutlined />
                         <p className="ant-upload-text">{parseId && images.length > 1 ? 'Змінити' : '+ Додати'}</p>
@@ -155,41 +155,41 @@ const FileInputsPart: React.FC = () => {
                         maxCount={1}
                         onPreview={handlePreview}
                         uploadTo="image"
-                        onSuccessUpload={(image:Image) => {
+                        onSuccessUpload={(image: Image) => {
                             newStreetcodeInfoStore.relatedFigureId = image.id;
                         }}
                         onRemove={(file) => {
                             ImagesApi.delete(newStreetcodeInfoStore.relatedFigureId!);
                         }}
-                        //onChange={x => setImages(...images, images[2])}
-                      >
+                    //onChange={x => setImages(...images, images[2])}
+                    >
                         <InboxOutlined />
                         <p className="ant-upload-text">{parseId && images.length > 2 ? 'Змінити' : '+ Додати'}</p>
                     </FileUploader>
                 </FormItem>
             </div>
             <div className="display-flex-row">
-            <FormItem
-                name="audio"
-                label="Аудіо"
-            >
-                <FileUploader
-                    //fileList={audios}
-                    accept=".mp3"
-                    maxCount={1}
-                    listType="picture-card"
-                    uploadTo="audio"
-                    onRemove={(file) => {
-                        AudiosApi.delete(newStreetcodeInfoStore.audioId!);
-                    }}
-                    onSuccessUpload={(audio:Audio) => {
-                        newStreetcodeInfoStore.audioId = audio.id;
-                    }}
+                <FormItem
+                    name="audio"
+                    label="Аудіо"
                 >
+                    <FileUploader
+                        //fileList={audios}
+                        accept=".mp3"
+                        maxCount={1}
+                        listType="picture-card"
+                        uploadTo="audio"
+                        onRemove={(file) => {
+                            AudiosApi.delete(newStreetcodeInfoStore.audioId!);
+                        }}
+                        onSuccessUpload={(audio: Audio) => {
+                            newStreetcodeInfoStore.audioId = audio.id;
+                        }}
+                    >
                         <InboxOutlined />
                         <p className="ant-upload-text">{parseId && audios.length > 0 ? 'Змінити' : '+ Додати'}</p>
-                </FileUploader>
-            </FormItem>
+                    </FileUploader>
+                </FormItem>
             </div>
             <PreviewFileModal file={filePreview} opened={previewOpen} setOpened={setPreviewOpen} />
         </div>
