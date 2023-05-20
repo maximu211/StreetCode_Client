@@ -26,15 +26,15 @@ export default class ImageStore {
     }
 
     static async getImageById(imageId: number): Promise<Image | undefined> {
-        let image: Image | undefined;
         if (imageId > 0) {
-            await imagesApi.getById(imageId)
-                .then((im) => {
-                    image = im;
-                })
-                .catch((error) => { });
+            try {
+                const image = await imagesApi.getById(imageId);
+                return image;
+            } catch (error) {
+                console.error(error);
+            }
         }
-        return image;
+        return undefined;
     }
 
     public getImage = (id: number) => {
