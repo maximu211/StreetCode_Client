@@ -69,7 +69,7 @@ const RelatedFiguresComponent = ({ setActiveTagId } : Props) => {
         const hasBottomRow = figureOnBottomRow !== undefined;
 
         const sliderItem = (
-            <div className="TwoRowSlide" key={i}>
+            <div className="twoRowSlide" key={i}>
                 <RelatedFigureItem
                     relatedFigure={figureOnTopRow}
                     filterTags
